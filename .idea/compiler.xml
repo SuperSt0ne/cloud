@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="cloud-common" />
+        <module name="cloud-sdk" />
+        <module name="cloud-search" />
+        <module name="cloud-user" />
+        <module name="cloud-goods" />
+        <module name="cloud-depend" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cloud-dependence" target="8" />
+      <module name="cloud-dependency" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cloud-goods" options="-parameters" />
+      <module name="cloud-search" options="-parameters" />
+      <module name="cloud-user" options="-parameters" />
+    </option>
+  </component>
+</project>

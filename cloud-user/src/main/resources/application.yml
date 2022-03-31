@@ -1,0 +1,66 @@
+server:
+  port: 8000
+spring:
+  main:
+    allow-circular-references: true
+  application:
+    name: cloud-user
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/rango?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    dbcp2:
+      min-idle: 5                                 # 数据库连接池最小维持连接数
+      initial-size: 5                            # 初始连接数
+      max-total: 5                               # 最大连接数
+      max-wait-millis: 200
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false
+  redis:
+    database: 0
+    host: port-forward.bookln.cn
+    port: 6379
+    password: Yunti2014
+    connect-timeout: 3000
+    jedis:
+      pool:
+        max-active: 8  # default
+        max-wait: -1  # default
+        max-idle: 8  # default
+        min-idle: 0  # default
+
+dubbo:
+  application:
+    name: cloud-user #  注册中心的服务名称
+  registry:
+    #    address: zookeeper://127.0.0.1:2181?backup=127.0.0.1:2182,127.0.0.1:2183
+    address: nacos://127.0.0.1:8848
+  protocol:
+    name: dubbo # dubbo 协议
+    port: 20880 # 开放端口
+  scan:
+    base-packages: com.stone.user.service # 提供的服务
+  consumer:
+    check: false
+
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  type-aliases-package: com.stone.user.pojo
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  global-config:
+    # 逻辑删除配置
+    db-config:
+      # 删除前
+      logic-not-delete-value: 1
+      # 删除后
+      logic-delete-value: 0
