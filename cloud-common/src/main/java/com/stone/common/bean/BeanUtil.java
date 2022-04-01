@@ -7,10 +7,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Created by rango on 2020/3/12
+ */
 public class BeanUtil {
 
     /**
      * 将对象转换为map
+     *
+     * @param bean
+     * @return
      */
     public static <T> Map<String, Object> beanToMap(T bean) {
         Map<String, Object> map = new HashMap<>();
@@ -25,6 +31,10 @@ public class BeanUtil {
 
     /**
      * 将map转换为javabean对象
+     *
+     * @param map
+     * @param clazz
+     * @return
      */
     public static <T> T mapToBean(Map<String, Object> map, Class<T> clazz) throws Exception {
         T bean = clazz.newInstance();

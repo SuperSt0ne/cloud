@@ -22,6 +22,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cloud-common" options="-parameters" />
       <module name="cloud-goods" options="-parameters" />
       <module name="cloud-search" options="-parameters" />
       <module name="cloud-user" options="-parameters" />

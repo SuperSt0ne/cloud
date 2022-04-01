@@ -1,5 +1,6 @@
 package com.stone.user.controller;
 
+import com.stone.common.cache.redis.RedisService;
 import com.stone.common.result.ApiResult;
 import com.stone.common.result.Message;
 import com.stone.dto.UserDTO;
@@ -17,6 +18,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RedisService redisService;
+
     @GetMapping("/user/{userId}")
     public ApiResult<UserDTO> user(@PathVariable Long userId) {
         ApiResult<UserDTO> result = new ApiResult<>();
@@ -30,6 +34,13 @@ public class UserController {
             return result;
         }
         result.setData(user);
+        return result;
+    }
+
+    @GetMapping("/user/redis/{key}")
+    public ApiResult<String> userRedis(@PathVariable String key) {
+        ApiResult<String> result = new ApiResult<>();
+        result.setData(redisService.get(key));
         return result;
     }
 

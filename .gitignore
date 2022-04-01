@@ -1,5 +1,5 @@
 # Project exclude paths
-/cloud-common/target/
+/cloud-common-deprecated/target/
 /cloud-sdk/target/
 
 .idea

@@ -23,7 +23,4 @@ public class UserDO implements Serializable {
     @TableField(value = "age")
     private Integer age;
 
-    @TableField(value = "type")
-    private Integer type;
-
 }

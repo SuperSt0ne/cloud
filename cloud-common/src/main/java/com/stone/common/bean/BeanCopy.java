@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentMap;
 public class BeanCopy {
     private static ConcurrentMap<String, BeanCopier> beanCopierMap = new ConcurrentHashMap<>();
 
-    public static <T> List<T> doConvertListDto(List<T> list, Class<T> dtoClz) {
+    public static <T> List<T> doConvertListDto(List list, Class<T> dtoClz) {
         if (list == null) {
             return new ArrayList<>();
         }
