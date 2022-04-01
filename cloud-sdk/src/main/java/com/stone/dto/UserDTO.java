@@ -3,6 +3,7 @@ package com.stone.dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 public class UserDTO implements Serializable {
@@ -13,7 +14,19 @@ public class UserDTO implements Serializable {
 
     private String name;
 
-    private Integer age;
+    private String phone;
 
-    private Integer type;
+    private String email;
+
+    private String photo;
+
+    private String password;
+
+    private Date gmtCreate;
+
+    private Date gmtModified;
+
+    private Integer status;
+
+    private Integer isDelete;
 }
