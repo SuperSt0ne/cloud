@@ -3,6 +3,7 @@ package com.stone.common.result;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 public class ApiResult<T> implements Serializable {
@@ -14,6 +15,8 @@ public class ApiResult<T> implements Serializable {
     private Boolean status;
 
     private String errorMsg;
+
+    private Date requestTime = new Date();
 
     public void setData(T data) {
         this.status = Boolean.TRUE;

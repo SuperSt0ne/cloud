@@ -37,7 +37,7 @@ public class UserController {
         return result;
     }
 
-    @GetMapping("/user/redis/{key}")
+    @GetMapping("/redis/{key}")
     public ApiResult<String> userRedis(@PathVariable String key) {
         ApiResult<String> result = new ApiResult<>();
         result.setData(redisService.get(key));
