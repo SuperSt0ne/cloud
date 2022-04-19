@@ -14,6 +14,8 @@ public class ApiResult<T> implements Serializable {
 
     private Boolean status;
 
+    private String code;
+
     private String errorMsg;
 
     private Date requestTime = new Date();
@@ -21,10 +23,12 @@ public class ApiResult<T> implements Serializable {
     public void setData(T data) {
         this.status = Boolean.TRUE;
         this.data = data;
+        this.code = ResultCode.CODE_SUCCESS;
     }
 
     public void setErrorMsg(String errorMsg) {
         this.status = Boolean.FALSE;
         this.errorMsg = errorMsg;
+        this.code = ResultCode.CODE_GLOBAL_EXCEPTION;
     }
 }

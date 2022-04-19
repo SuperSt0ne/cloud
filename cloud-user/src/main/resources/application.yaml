@@ -1,5 +1,9 @@
 server:
   port: 8000
+  servlet:
+    encoding:
+      charset: UTF-8
+      force-response: true
 spring:
   application:
     name: cloud-user
