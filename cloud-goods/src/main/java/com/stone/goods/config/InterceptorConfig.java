@@ -1,4 +1,4 @@
-package com.stone.user.config;
+package com.stone.goods.config;
 
 import com.stone.common.interceptor.CloudWebLogInterceptor;
 import org.springframework.context.annotation.Bean;

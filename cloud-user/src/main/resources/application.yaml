@@ -42,6 +42,11 @@ spring:
         server-addr: 127.0.0.1:8848
       discovery:
         server-addr: 127.0.0.1:8848
+  cache:
+    redis:
+      cache-null-values: true #存储空值 防止缓存穿透
+      time-to-live:
+
 
 dubbo:
   application:

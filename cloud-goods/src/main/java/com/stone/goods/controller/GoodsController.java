@@ -1,11 +1,10 @@
-package com.stone.goods.action;
+package com.stone.goods.controller;
 
 import com.stone.common.result.ApiResult;
 import com.stone.common.result.Message;
 import com.stone.dto.UserDTO;
 import com.stone.sdk.UserService;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;

@@ -43,7 +43,7 @@ dubbo:
     name: dubbo # dubbo 协议
     port: 20881 # 开放端口
   scan:
-    base-packages: com.stone.user.service # 提供的服务
+    base-packages: com.stone.goods.service # 提供的服务
   consumer:
     check: false
 
