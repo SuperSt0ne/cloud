@@ -1,4 +1,4 @@
-package com.stone.cloudsearch.config;
+package com.stone.search.config;
 
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +15,7 @@ public class EsConfig  extends AbstractElasticsearchConfiguration {
     public RestHighLevelClient elasticsearchClient() {
 
         final ClientConfiguration clientConfiguration = ClientConfiguration.builder()
-                .connectedTo("127.0.0.1:9200")
+                .connectedTo("47.104.190.32:9201")
                 .build();
         return RestClients.create(clientConfiguration).rest();
     }

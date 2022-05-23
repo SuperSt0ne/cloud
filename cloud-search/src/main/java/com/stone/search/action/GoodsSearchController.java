@@ -1,5 +1,6 @@
-package com.stone.cloudsearch.action;
+package com.stone.search.action;
 
+import com.stone.common.result.ApiResult;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.indices.CreateIndexRequest;
@@ -13,22 +14,25 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
 @RestController
-public class GoodsAction {
+public class GoodsSearchController {
 
     @Autowired
     private RestHighLevelClient client;
 
-    @RequestMapping("/goods/indexCreate/{index}")
-    public String createGoodsIndex(@PathVariable String index) throws IOException {
+    @RequestMapping("/index/create")
+    public ApiResult<CreateIndexResponse> createGoodsIndex(String index) throws IOException {
+        ApiResult<CreateIndexResponse> result = new ApiResult<>();
         CreateIndexRequest request = new CreateIndexRequest(index);
         CreateIndexResponse response = client.indices().create(request, RequestOptions.DEFAULT);
-        return response.toString();
+        result.setData(response);
+        return result;
     }
 
-    @RequestMapping("/goods/indexSearch/{index}")
-    public String getGoodsIndex(@PathVariable String index) throws IOException {
+    @RequestMapping("/index/search")
+    public ApiResult<Boolean> getGoodsIndex(String index) throws IOException {
+        ApiResult<Boolean> result = new ApiResult<>();
         GetIndexRequest request = new GetIndexRequest(index);
-        boolean exists = client.indices().exists(request, RequestOptions.DEFAULT);
-        return exists + "";
+        result.setData(client.indices().exists(request, RequestOptions.DEFAULT));
+        return result;
     }
 }
