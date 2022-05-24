@@ -42,6 +42,7 @@ dubbo:
   protocol:
     name: dubbo # dubbo 协议
     port: 20881 # 开放端口
+    serialization: Kryo
   scan:
     base-packages: com.stone.goods.service # 提供的服务
   consumer:
