@@ -47,6 +47,8 @@ spring:
     redis:
       cache-null-values: true #存储空值 防止缓存穿透
       time-to-live:
+  elasticsearch:
+    uris: ["http://47.104.190.32:9201"]
 
 
 dubbo:
