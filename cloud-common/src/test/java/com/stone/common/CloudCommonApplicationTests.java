@@ -8,6 +8,7 @@ class CloudCommonApplicationTests {
 
     @Test
     void contextLoads() {
+        
     }
 
 }
