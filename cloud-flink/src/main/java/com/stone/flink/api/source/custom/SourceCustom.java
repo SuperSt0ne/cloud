@@ -1,0 +1,24 @@
+package com.stone.flink.api.source.custom;
+
+import com.stone.sdk.flink.bean.Event;
+import org.apache.flink.configuration.Configuration;
+import org.apache.flink.configuration.RestOptions;
+import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+
+public class SourceCustom {
+    public static void main(String[] args) throws Exception {
+
+        Configuration configuration = new Configuration();
+        configuration.setInteger(RestOptions.PORT, 8082);
+
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment(configuration);
+        env.setParallelism(1);
+
+        DataStreamSource<Event> customSource = env.addSource(new ClickSource());
+
+        customSource.print();
+
+        env.execute("click-test");
+    }
+}

@@ -1,0 +1,15 @@
+{"count":92,"timestamp":1679729791515,"url":"./cart","userName":"Bob"}
+{"count":75,"timestamp":1679729792521,"url":"./prod","userName":"Mary"}
+{"count":54,"timestamp":1679729793525,"url":"./fav","userName":"Bob"}
+{"count":27,"timestamp":1679729794530,"url":"./cart","userName":"Mary"}
+{"count":29,"timestamp":1679729795531,"url":"./prod","userName":"Rango"}
+{"count":63,"timestamp":1679729796537,"url":"./fav","userName":"Mary"}
+{"count":34,"timestamp":1679729797542,"url":"./prod","userName":"Rango"}
+{"count":58,"timestamp":1679729798546,"url":"./home","userName":"Bob"}
+{"count":14,"timestamp":1679729799552,"url":"./home","userName":"Rango"}
+{"count":82,"timestamp":1679729800556,"url":"./fav","userName":"Bob"}
+{"count":27,"timestamp":1679729801561,"url":"./prod","userName":"Mary"}
+{"count":64,"timestamp":1679729802568,"url":"./home","userName":"Rango"}
+{"count":44,"timestamp":1679729803569,"url":"./fav","userName":"Rango"}
+{"count":33,"timestamp":1679729804575,"url":"./fav","userName":"Rango"}
+{"count":51,"timestamp":1679729805580,"url":"./fav","userName":"Mary"}

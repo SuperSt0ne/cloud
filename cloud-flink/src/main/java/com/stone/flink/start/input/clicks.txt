@@ -1,0 +1,7 @@
+Rango, ./home, 1000
+lange, ./cart, 2000
+Tim, ./prod?id=100, 3000
+Bob, ./home/info, 4000
+Rango, ./home/password, 5000
+Rango, ./cart, 6000
+Bob, ./prod?id=101, 7000
