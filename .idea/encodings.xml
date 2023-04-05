@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/cloud-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-depend/cloud-base-depend/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-depend/cloud-base-depend/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-depend/cloud-server-depend/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-depend/cloud-server-depend/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-depend/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-depend/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-flink/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-flink/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-goods/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-goods/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-sdk/cloud-sdk-flink/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-sdk/cloud-sdk-flink/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-sdk/cloud-sdk-user/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-sdk/cloud-sdk-user/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-sdk/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-sdk/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-user/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-user/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

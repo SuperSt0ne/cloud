@@ -3,6 +3,16 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/cloud.iml" filepath="$PROJECT_DIR$/.idea/cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-depend/cloud-base-depend/cloud-base-depend.iml" filepath="$PROJECT_DIR$/cloud-depend/cloud-base-depend/cloud-base-depend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-common/cloud-common.iml" filepath="$PROJECT_DIR$/cloud-common/cloud-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-depend/cloud-depend.iml" filepath="$PROJECT_DIR$/cloud-depend/cloud-depend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-flink/cloud-flink.iml" filepath="$PROJECT_DIR$/cloud-flink/cloud-flink.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-goods/cloud-goods.iml" filepath="$PROJECT_DIR$/cloud-goods/cloud-goods.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-sdk/cloud-sdk.iml" filepath="$PROJECT_DIR$/cloud-sdk/cloud-sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-sdk/cloud-sdk-flink/cloud-sdk-flink.iml" filepath="$PROJECT_DIR$/cloud-sdk/cloud-sdk-flink/cloud-sdk-flink.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-sdk/cloud-sdk-user/cloud-sdk-user.iml" filepath="$PROJECT_DIR$/cloud-sdk/cloud-sdk-user/cloud-sdk-user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-depend/cloud-server-depend/cloud-server-depend.iml" filepath="$PROJECT_DIR$/cloud-depend/cloud-server-depend/cloud-server-depend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-user/cloud-user.iml" filepath="$PROJECT_DIR$/cloud-user/cloud-user.iml" />
     </modules>
   </component>
 </project>
