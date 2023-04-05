@@ -1,6 +1,5 @@
 # Compiled class file
 *.classd
-*.iml
 
 # Log file
 *.log
@@ -24,3 +23,14 @@
 hs_err_pid*
 
 .idea
+*.iws
+*.iml
+*.ipr
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+.DS_Store
+/**/**.iml
+/**/**/**.iml
