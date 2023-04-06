@@ -1,7 +1,7 @@
 package com.stone.flink.api.window;
 
 import com.alibaba.fastjson2.JSON;
-import com.stone.flink.api.source.custom.ClickSource;
+import com.stone.flink.api.source.custom.CustomUserOptSource;
 import com.stone.sdk.flink.bean.Event;
 import lombok.Data;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
@@ -33,7 +33,7 @@ public class WindowAggregateFunctionApi {
         env.setParallelism(1);
 
         //读取数据
-        DataStreamSource<Event> sourceStream = env.addSource(new ClickSource());
+        DataStreamSource<Event> sourceStream = env.addSource(new CustomUserOptSource());
 
         SingleOutputStreamOperator<Event> stream = sourceStream.assignTimestampsAndWatermarks(
                 WatermarkStrategy.<Event>forBoundedOutOfOrderness(Duration.ofSeconds(2))

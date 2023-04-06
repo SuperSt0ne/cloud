@@ -15,7 +15,7 @@ public class SourceCustom {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment(configuration);
         env.setParallelism(1);
 
-        DataStreamSource<Event> customSource = env.addSource(new ClickSource());
+        DataStreamSource<Event> customSource = env.addSource(new CustomUserOptSource());
 
         customSource.print();
 

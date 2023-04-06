@@ -1,7 +1,7 @@
 package com.stone.flink.api.sink;
 
 import com.alibaba.fastjson2.JSON;
-import com.stone.flink.api.source.custom.ClickSource;
+import com.stone.flink.api.source.custom.CustomUserOptSource;
 import com.stone.sdk.flink.bean.Event;
 import org.apache.flink.connector.jdbc.JdbcConnectionOptions;
 import org.apache.flink.connector.jdbc.JdbcExecutionOptions;
@@ -14,7 +14,7 @@ public class SinkToMysqlApi {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
         //读取数据
-        DataStreamSource<Event> source = env.addSource(new ClickSource());
+        DataStreamSource<Event> source = env.addSource(new CustomUserOptSource());
         source.map(data -> {
             System.out.println(JSON.toJSONString(data));
             return data;

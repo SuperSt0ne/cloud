@@ -1,6 +1,6 @@
 package com.stone.flink.api.sink;
 
-import com.stone.flink.api.source.custom.ClickSource;
+import com.stone.flink.api.source.custom.CustomUserOptSource;
 import com.stone.sdk.flink.bean.Event;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -17,7 +17,7 @@ public class SinkToRedisApi {
         env.setParallelism(1);
 
         //读取数据
-        DataStreamSource<Event> source = env.addSource(new ClickSource());
+        DataStreamSource<Event> source = env.addSource(new CustomUserOptSource());
 
         FlinkJedisPoolConfig conf = new FlinkJedisPoolConfig.Builder()
                 .setHost("127.0.0.1")

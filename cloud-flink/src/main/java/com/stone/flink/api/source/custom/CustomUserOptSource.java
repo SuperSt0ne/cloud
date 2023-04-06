@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * 自定义SourceFunction
  */
 @Data
-public class ClickSource implements SourceFunction<Event> {
+public class CustomUserOptSource implements SourceFunction<Event> {
 
     //表示位
     private Boolean running = true;
@@ -42,10 +42,10 @@ public class ClickSource implements SourceFunction<Event> {
         running = false;
     }
 
-    public ClickSource() {
+    public CustomUserOptSource() {
     }
 
-    public ClickSource(Long sleepTime) {
+    public CustomUserOptSource(Long sleepTime) {
         this.sleepTime = sleepTime;
     }
 

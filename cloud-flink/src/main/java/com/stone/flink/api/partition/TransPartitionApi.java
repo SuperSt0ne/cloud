@@ -1,6 +1,6 @@
 package com.stone.flink.api.partition;
 
-import com.stone.flink.api.source.custom.ClickSource;
+import com.stone.flink.api.source.custom.CustomUserOptSource;
 import com.stone.sdk.flink.bean.Event;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -11,7 +11,7 @@ public class TransPartitionApi {
         env.setParallelism(1);
 
         //读取数据
-        DataStreamSource<Event> source = env.addSource(new ClickSource());
+        DataStreamSource<Event> source = env.addSource(new CustomUserOptSource());
 
         //1.随机分区
         source.shuffle().print().setParallelism(4);

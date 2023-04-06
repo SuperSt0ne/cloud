@@ -1,7 +1,7 @@
 package com.stone.flink.api.sink;
 
 import com.alibaba.fastjson2.JSON;
-import com.stone.flink.api.source.custom.ClickSource;
+import com.stone.flink.api.source.custom.CustomUserOptSource;
 import com.stone.sdk.flink.bean.Event;
 import org.apache.flink.api.common.serialization.SimpleStringEncoder;
 import org.apache.flink.core.fs.Path;
@@ -19,7 +19,7 @@ public class SinkToFileApi {
         env.setParallelism(1);
 
         //读取数据
-        DataStreamSource<Event> source = env.addSource(new ClickSource());
+        DataStreamSource<Event> source = env.addSource(new CustomUserOptSource());
 
         StreamingFileSink<String> sink = StreamingFileSink.<String>forRowFormat(
                         new Path("cloud-flink/src/main/java/com/stone/flink/api/sink/output"),

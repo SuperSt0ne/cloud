@@ -1,6 +1,6 @@
 package com.stone.flink.api.process;
 
-import com.stone.flink.api.source.custom.ClickSource;
+import com.stone.flink.api.source.custom.CustomUserOptSource;
 import com.stone.sdk.flink.bean.Event;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.RuntimeContext;
@@ -22,7 +22,7 @@ public class ProcessFunctionApi {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
-        SingleOutputStreamOperator<Event> stream = env.addSource(new ClickSource())
+        SingleOutputStreamOperator<Event> stream = env.addSource(new CustomUserOptSource())
                 .assignTimestampsAndWatermarks(
                         WatermarkStrategy.<Event>forBoundedOutOfOrderness(Duration.ZERO)
                                 .withTimestampAssigner(((element, recordTimestamp) -> element.timestamp))

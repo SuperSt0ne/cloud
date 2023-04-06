@@ -1,6 +1,6 @@
 package com.stone.flink.api.agg;
 
-import com.stone.flink.api.source.custom.ClickSource;
+import com.stone.flink.api.source.custom.CustomUserOptSource;
 import com.stone.sdk.flink.bean.Event;
 import org.apache.flink.api.common.typeinfo.Types;
 import org.apache.flink.api.java.tuple.Tuple2;
@@ -16,7 +16,7 @@ public class TransReduceApi {
         env.setParallelism(1);
 
         //读取数据
-        DataStreamSource<Event> source = env.addSource(new ClickSource());
+        DataStreamSource<Event> source = env.addSource(new CustomUserOptSource());
 
         //1. 统计每个用户的访问频次
         SingleOutputStreamOperator<Tuple2<String, Long>> clickByUser = source
