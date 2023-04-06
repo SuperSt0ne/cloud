@@ -20,12 +20,12 @@
     <dependencies>
         <dependency>
             <groupId>com.stone</groupId>
-            <artifactId>cloud-depend</artifactId>
+            <artifactId>cloud-base-depend</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.stone</groupId>
-            <artifactId>cloud-sdk</artifactId>
+            <artifactId>cloud-server-depend</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
