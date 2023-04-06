@@ -9,7 +9,7 @@ public class UserServiceClientFallback implements UserServiceClient {
 
     @Override
     public UserDTO getById(Long id) {
-        throw new RuntimeException("网络移除，请稍后重试");
+        throw new RuntimeException("网络异常，请稍后重试");
     }
 
 }
