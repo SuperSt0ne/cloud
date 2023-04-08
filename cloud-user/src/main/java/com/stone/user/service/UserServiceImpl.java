@@ -18,9 +18,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO getById(Long id) {
-        if (true) {
-            throw new RuntimeException("hhh");
-        }
         return BeanCopy.copy(userMapper.selectById(id), UserDTO.class);
     }
 

@@ -1,4 +1,4 @@
-package com.stone.goods.config;
+package com.stone.config;
 
 import com.stone.common.exception.GlobalExceptionHandler;
 import com.stone.common.http.converter.ApiResultHttpMessageConverter;
