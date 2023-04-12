@@ -15,7 +15,10 @@ import org.apache.flink.util.OutputTag;
 
 import java.time.Duration;
 
-public class SplitStreamApi {
+/**
+ * 侧边流
+ */
+public class OutSideStreamApi {
     public static void main(String[] args) throws Exception {
         Configuration config = new Configuration();
         config.setInteger(RestOptions.PORT, 8888);

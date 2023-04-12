@@ -1,4 +1,4 @@
-package com.stone.flink.api.base.source.custom;
+package com.stone.flink.api.base.source;
 
 import com.stone.sdk.flink.bean.Event;
 import com.stone.sdk.flink.source.CustomUserOptSource;
