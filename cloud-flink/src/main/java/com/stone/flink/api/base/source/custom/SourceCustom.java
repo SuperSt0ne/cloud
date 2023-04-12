@@ -1,6 +1,7 @@
 package com.stone.flink.api.base.source.custom;
 
 import com.stone.sdk.flink.bean.Event;
+import com.stone.sdk.flink.source.CustomUserOptSource;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.RestOptions;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;

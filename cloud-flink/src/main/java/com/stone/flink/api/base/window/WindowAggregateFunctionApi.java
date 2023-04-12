@@ -1,7 +1,7 @@
 package com.stone.flink.api.base.window;
 
 import com.alibaba.fastjson2.JSON;
-import com.stone.flink.api.base.source.custom.CustomUserOptSource;
+import com.stone.sdk.flink.source.CustomUserOptSource;
 import com.stone.sdk.flink.bean.Event;
 import lombok.Data;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;

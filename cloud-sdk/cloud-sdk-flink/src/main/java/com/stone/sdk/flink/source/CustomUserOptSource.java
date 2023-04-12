@@ -1,4 +1,4 @@
-package com.stone.flink.api.base.source.custom;
+package com.stone.sdk.flink.source;
 
 import com.stone.sdk.flink.bean.Event;
 import lombok.Data;
@@ -14,9 +14,9 @@ import java.util.concurrent.TimeUnit;
 public class CustomUserOptSource implements SourceFunction<Event> {
 
     //表示位
-    private Boolean running = true;
+    public Boolean running = true;
 
-    private Long sleepTime = 1000L;
+    public Integer sleepTime;
 
     @Override
     public void run(SourceContext<Event> sourceContext) throws Exception {
@@ -32,7 +32,7 @@ public class CustomUserOptSource implements SourceFunction<Event> {
 //            sourceContext.collect(new Event(user, url, Calendar.getInstance().getTimeInMillis(), (int) (Math.random() * 100)));
             sourceContext.collect(new Event(user, url, System.currentTimeMillis()));
             if (sleepTime > 0) {
-                TimeUnit.MICROSECONDS.sleep(sleepTime);
+                TimeUnit.SECONDS.sleep(sleepTime);
             }
         }
     }
@@ -43,9 +43,10 @@ public class CustomUserOptSource implements SourceFunction<Event> {
     }
 
     public CustomUserOptSource() {
+        this.sleepTime = 1;
     }
 
-    public CustomUserOptSource(Long sleepTime) {
+    public CustomUserOptSource(Integer sleepTime) {
         this.sleepTime = sleepTime;
     }
 

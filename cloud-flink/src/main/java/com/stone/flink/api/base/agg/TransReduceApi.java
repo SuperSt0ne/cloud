@@ -1,6 +1,6 @@
 package com.stone.flink.api.base.agg;
 
-import com.stone.flink.api.base.source.custom.CustomUserOptSource;
+import com.stone.sdk.flink.source.CustomUserOptSource;
 import com.stone.sdk.flink.bean.Event;
 import org.apache.flink.api.common.typeinfo.Types;
 import org.apache.flink.api.java.tuple.Tuple2;

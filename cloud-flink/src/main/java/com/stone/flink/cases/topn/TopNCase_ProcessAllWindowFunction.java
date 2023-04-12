@@ -1,6 +1,6 @@
 package com.stone.flink.cases.topn;
 
-import com.stone.flink.api.base.source.custom.CustomUserOptSource;
+import com.stone.sdk.flink.source.CustomUserOptSource;
 import com.stone.sdk.flink.bean.Event;
 import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
@@ -35,7 +35,7 @@ public class TopNCase_ProcessAllWindowFunction {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment(config);
         env.setParallelism(1);
 
-        SingleOutputStreamOperator<Event> stream = env.addSource(new CustomUserOptSource(500L))
+        SingleOutputStreamOperator<Event> stream = env.addSource(new CustomUserOptSource(1))
                 .assignTimestampsAndWatermarks(WatermarkStrategy.<Event>forBoundedOutOfOrderness(Duration.ZERO)
                         .withTimestampAssigner((SerializableTimestampAssigner<Event>) (element, recordTimestamp) -> element.timestamp));
 
