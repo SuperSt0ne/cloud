@@ -1,16 +1,11 @@
 package com.stone.flink.api.multi_stream;
 
-import com.stone.sdk.flink.bean.Event;
-import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.RestOptions;
-import org.apache.flink.streaming.api.datastream.DataStream;
+import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.functions.ProcessFunction;
-import org.apache.flink.util.Collector;
-
-import java.time.Duration;
+import org.apache.flink.streaming.api.functions.co.CoMapFunction;
 
 /**
  * 合流
@@ -23,38 +18,22 @@ public class ConnectStreamApi {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment(config);
         env.setParallelism(1);
 
-        //nc -lk 7777
-        SingleOutputStreamOperator<Event> dataStream1 = env.socketTextStream("127.0.0.1", 7777)
-                .map(data -> {
-                    String[] field = data.split(",");
-                    return new Event(field[0], field[1], Long.parseLong(field[2]));
-                }).assignTimestampsAndWatermarks(
-                        WatermarkStrategy.<Event>forBoundedOutOfOrderness(Duration.ofSeconds(2L))
-                                .withTimestampAssigner(((element, recordTimestamp) -> element.timestamp))
-                );
+        DataStreamSource<Integer> stream1 = env.fromElements(1, 2, 3);
+        DataStreamSource<Long> stream2 = env.fromElements(1L, 2L, 3L);
 
-        dataStream1.print("stream-1");
-
-        //nc -lk 7778
-        SingleOutputStreamOperator<Event> dataStream2 = env.socketTextStream("127.0.0.1", 7778)
-                .map(data -> {
-                    String[] field = data.split(",");
-                    return new Event(field[0], field[1], Long.parseLong(field[2]));
-                }).assignTimestampsAndWatermarks(
-                        WatermarkStrategy.<Event>forBoundedOutOfOrderness(Duration.ofSeconds(5L))
-                                .withTimestampAssigner(((element, recordTimestamp) -> element.timestamp))
-                );
-
-        dataStream2.print("stream-2");
-
-        DataStream<Event> unionStream = dataStream1.union(dataStream2);
-
-        unionStream.process(new ProcessFunction<Event, String>() {
+        SingleOutputStreamOperator<String> connectStream = stream1.connect(stream2).map(new CoMapFunction<Integer, Long, String>() {
             @Override
-            public void processElement(Event value, ProcessFunction<Event, String>.Context ctx, Collector<String> out) throws Exception {
-                out.collect("水位线: " + ctx.timerService().currentWatermark());
+            public String map1(Integer value) throws Exception {
+                return "int stream data:" + value;
             }
-        }).print();
+
+            @Override
+            public String map2(Long value) throws Exception {
+                return "long stream data:" + value;
+            }
+        });
+
+        connectStream.print();
 
         env.execute();
 
