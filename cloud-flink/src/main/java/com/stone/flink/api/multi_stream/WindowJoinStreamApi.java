@@ -46,12 +46,9 @@ public class WindowJoinStreamApi {
                 .where(data -> data.f0)
                 .equalTo(data -> data.f0)
                 .window(TumblingEventTimeWindows.of(Time.seconds(5)))
-                .apply(new JoinFunction<Tuple2<String, Long>, Tuple2<String, Integer>, String>() {
-                    @Override
-                    public String join(Tuple2<String, Long> first, Tuple2<String, Integer> second) throws Exception {
-                        return first + " -> " + second;
-                    }
-                }).print();
+                .apply((JoinFunction<Tuple2<String, Long>, Tuple2<String, Integer>, String>) (first, second) ->
+                        first + " -> " + second)
+                .print();
 
 
         env.execute();

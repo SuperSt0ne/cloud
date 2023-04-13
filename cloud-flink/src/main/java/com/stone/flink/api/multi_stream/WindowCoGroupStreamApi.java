@@ -2,7 +2,6 @@ package com.stone.flink.api.multi_stream;
 
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.CoGroupFunction;
-import org.apache.flink.api.common.functions.JoinFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.RestOptions;
@@ -10,7 +9,6 @@ import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
 import org.apache.flink.streaming.api.windowing.time.Time;
-import org.apache.flink.util.Collector;
 
 import java.time.Duration;
 
@@ -48,12 +46,9 @@ public class WindowCoGroupStreamApi {
                 .where(data -> data.f0)
                 .equalTo(data -> data.f0)
                 .window(TumblingEventTimeWindows.of(Time.seconds(5)))
-                .apply(new CoGroupFunction<Tuple2<String, Long>, Tuple2<String, Integer>, String>() {
-                    @Override
-                    public void coGroup(Iterable<Tuple2<String, Long>> first, Iterable<Tuple2<String, Integer>> second, Collector<String> out) throws Exception {
-                        out.collect(first + " => " + second);
-                    }
-                }).print();
+                .apply((CoGroupFunction<Tuple2<String, Long>, Tuple2<String, Integer>, String>) (first, second, out) ->
+                        out.collect(first + " => " + second))
+                .print();
 
 
         env.execute();
