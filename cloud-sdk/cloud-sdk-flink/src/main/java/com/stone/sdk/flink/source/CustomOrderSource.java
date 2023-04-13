@@ -1,6 +1,7 @@
 package com.stone.sdk.flink.source;
 
 import com.stone.sdk.flink.bean.Event;
+import com.stone.sdk.flink.bean.Order;
 import lombok.Data;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
 
@@ -11,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  * 自定义SourceFunction
  */
 @Data
-public class CustomUserOptSource implements SourceFunction<Event> {
+public class CustomOrderSource implements SourceFunction<Order> {
 
     //表示位
     public Boolean running = true;
@@ -19,18 +20,17 @@ public class CustomUserOptSource implements SourceFunction<Event> {
     public Integer sleepTime;
 
     @Override
-    public void run(SourceContext<Event> sourceContext) throws Exception {
+    public void run(SourceContext<Order> sourceContext) throws Exception {
         //随机生成数据
         Random random = new Random();
         //定义字段选取的数据集
         String[] users = {"Rango", "Bob", "Mary", "Tim"};
-        String[] urls = {"./home", "./prod", "./fav", "./cart", "./chat"};
 
         while (running) {
             String user = users[random.nextInt(users.length)];
-            String url = urls[random.nextInt(urls.length)] + "?id=" + (int) (Math.random() * 10);
-//            sourceContext.collect(new Event(user, url, Calendar.getInstance().getTimeInMillis(), (int) (Math.random() * 100)));
-            sourceContext.collect(new Event(user, url, System.currentTimeMillis()));
+            long goodsId = (long) (Math.random() * 100);
+            long amount = (long) (Math.random() * 1000);
+            sourceContext.collect(new Order(goodsId, amount, user, System.currentTimeMillis()));
             if (sleepTime > 0) {
                 TimeUnit.SECONDS.sleep(sleepTime);
             }
@@ -42,11 +42,11 @@ public class CustomUserOptSource implements SourceFunction<Event> {
         running = false;
     }
 
-    public CustomUserOptSource() {
-        this.sleepTime = 1;
+    public CustomOrderSource() {
+        this.sleepTime = 2;
     }
 
-    public CustomUserOptSource(Integer sleepTime) {
+    public CustomOrderSource(Integer sleepTime) {
         this.sleepTime = sleepTime;
     }
 
