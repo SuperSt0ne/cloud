@@ -3,21 +3,37 @@ package com.stone.common.file;
 import com.alibaba.fastjson.JSON;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class ReadProject {
 
     private static final Map<String, Integer> COUNT_MAP = new HashMap<>();
 
-    private static final Map<String, Map<String, Integer>> COUNT_BY_FILE__MAP = new HashMap<>();
+    private static final Map<String, Map<String, Integer>> COUNT_BY_FILE_MAP = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
         String path = "/Users/stone/IdeaProjects/yt/slt";
         search(new File(path));
+        printCountMap();
+        printFileCountMap();
+        printFileCount(COUNT_BY_FILE_MAP.get("LANGE"));
+    }
+
+    private static void printCountMap() {
+        System.out.println("\n\n--> 数量总览");
         System.out.println(JSON.toJSONString(COUNT_MAP));
-        System.out.println(JSON.toJSONString(COUNT_BY_FILE__MAP));
+    }
+
+    private static void printFileCountMap() {
+        System.out.println("\n\n--> 文件数量总览");
+        System.out.println(JSON.toJSONString(COUNT_BY_FILE_MAP));
+    }
+
+    private static void printFileCount(Map<String, Integer> map) {
+        List<Map.Entry<String, Integer>> entries = new ArrayList<>(map.entrySet());
+        entries.sort((a, b) -> b.getValue() - a.getValue());
+        System.out.println("\n\n--> 数量排名");
+        System.out.println(JSON.toJSONString(entries));
     }
 
     private static void search(File file) throws IOException {
@@ -69,7 +85,7 @@ public class ReadProject {
     private static void addCount(String fileName, String key) {
         Integer count = COUNT_MAP.getOrDefault(key, 0);
         COUNT_MAP.put(key, count + 1);
-        Map<String, Integer> fileNameMap = COUNT_BY_FILE__MAP.computeIfAbsent(key, k -> new HashMap<>());
+        Map<String, Integer> fileNameMap = COUNT_BY_FILE_MAP.computeIfAbsent(key, k -> new HashMap<>());
         Integer countByFileName = fileNameMap.getOrDefault(fileName, 0);
         fileNameMap.put(fileName, countByFileName + 1);
     }
