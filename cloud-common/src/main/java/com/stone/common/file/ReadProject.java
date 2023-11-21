@@ -12,7 +12,8 @@ public class ReadProject {
     private static final Map<String, Map<String, Integer>> COUNT_BY_FILE_MAP = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
-        String path = "/Users/stone/IdeaProjects/yt/slt";
+//        String path = "/Users/stone/IdeaProjects/yt/slt";
+        String path = "/Users/stone/code/yt/slt";
         search(new File(path));
         printCountMap();
         printFileCountMap();
@@ -46,7 +47,7 @@ public class ReadProject {
                 search(subFile);
             } else {
                 if (subFile.getName().endsWith(".java")) {
-                    System.out.println(subFile.getAbsolutePath());
+//                    System.out.println(subFile.getAbsolutePath());
                     readFile(subFile);
                 }
             }
