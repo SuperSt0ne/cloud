@@ -27,7 +27,7 @@ public class ReadProject {
         }
     }
 
-    public static void main(String[] args) throws IOException, IllegalAccessException {
+    public static void main(String[] args) throws IOException {
         search(new File(PATH_MAC));
         printCountMap();
         printNovIncrement();
@@ -104,6 +104,7 @@ public class ReadProject {
                     if (!s.contains(".")) {
                         return;
                     }
+                    s = s.replace(")", "");
                     String[] strArr = s.split("\\.");
                     addCount(fileName, strArr[strArr.length - 1]);
                 }
@@ -112,7 +113,7 @@ public class ReadProject {
     }
 
     private static void addCount(String fileName, String key) {
-        String cnKey = USER_MAP.get(key);
+        String cnKey = USER_MAP.getOrDefault(key, key);
         COUNT_MAP.put(cnKey, COUNT_MAP.getOrDefault(cnKey, 0) + 1);
 
         Map<String, Integer> fileNameMap = COUNT_BY_FILE_MAP.computeIfAbsent(cnKey, k -> new HashMap<>());
