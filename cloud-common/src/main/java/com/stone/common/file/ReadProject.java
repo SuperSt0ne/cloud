@@ -3,21 +3,48 @@ package com.stone.common.file;
 import com.alibaba.fastjson.JSON;
 
 import java.io.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.*;
 
 public class ReadProject {
+
+    private static final Map<String, String> USER_MAP = new HashMap<>();
 
     private static final Map<String, Integer> COUNT_MAP = new HashMap<>();
 
     private static final Map<String, Map<String, Integer>> COUNT_BY_FILE_MAP = new HashMap<>();
 
-    public static void main(String[] args) throws IOException {
-        String path = "/Users/stone/IdeaProjects/yt/slt";
-//        String path = "/Users/stone/code/yt/slt";
-        search(new File(path));
+    private static final String PATH_MAC = "/Users/stone/IdeaProjects/yt/slt";
+
+    private static final String PATH_MAC_MINI = "/Users/stone/code/yt/slt";
+
+    static {
+        try {
+            parseUser();
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void main(String[] args) throws IOException, IllegalAccessException {
+        search(new File(PATH_MAC));
         printCountMap();
+        printNovIncrement();
         printFileCountMap();
-        printFileCount(COUNT_BY_FILE_MAP.get("LANGE"));
+    }
+
+    private static void printNovIncrement() {
+        Map<String, Integer> increment = new HashMap<>(MonthCount.OCT_COUNT_MAP);
+        COUNT_MAP.forEach((cnName, nowCount) -> {
+            if (increment.containsKey(cnName)) {
+                increment.computeIfPresent(cnName, (k, v) -> nowCount - v);
+            } else {
+                increment.put(cnName, nowCount);
+            }
+        });
+        System.out.println("\n\n--> increment count view:");
+        System.out.println(JSON.toJSONString(increment));
     }
 
     private static void printCountMap() {
@@ -28,6 +55,8 @@ public class ReadProject {
     private static void printFileCountMap() {
         System.out.println("\n\n--> count by file view:");
         System.out.println(JSON.toJSONString(COUNT_BY_FILE_MAP));
+
+        printFileCount(COUNT_BY_FILE_MAP.get("兰戈"));
     }
 
     private static void printFileCount(Map<String, Integer> map) {
@@ -58,12 +87,11 @@ public class ReadProject {
         String fileName = file.getName();
         try (FileInputStream stream = new FileInputStream(file);
              BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
-            String str;
-            while ((str = reader.readLine()) != null) {
-                match(fileName, str);
-//                System.out.println(str);
+            String line;
+            while ((line = reader.readLine()) != null) {
+                match(fileName, line);
+//                System.out.println(line);
             }
-            //close
             stream.close();
             reader.close();
         }
@@ -84,10 +112,23 @@ public class ReadProject {
     }
 
     private static void addCount(String fileName, String key) {
-        Integer count = COUNT_MAP.getOrDefault(key, 0);
-        COUNT_MAP.put(key, count + 1);
-        Map<String, Integer> fileNameMap = COUNT_BY_FILE_MAP.computeIfAbsent(key, k -> new HashMap<>());
+        String cnKey = USER_MAP.get(key);
+        COUNT_MAP.put(cnKey, COUNT_MAP.getOrDefault(cnKey, 0) + 1);
+
+        Map<String, Integer> fileNameMap = COUNT_BY_FILE_MAP.computeIfAbsent(cnKey, k -> new HashMap<>());
         Integer countByFileName = fileNameMap.getOrDefault(fileName, 0);
         fileNameMap.put(fileName, countByFileName + 1);
     }
+
+    private static void parseUser() throws IllegalAccessException {
+        Class<User> clazz = User.class;
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            if (Modifier.isStatic(field.getModifiers())) {
+                USER_MAP.put(field.getName(), (String) field.get(clazz));
+            }
+        }
+    }
+
 }
