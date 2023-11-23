@@ -12,8 +12,8 @@ public class ReadProject {
     private static final Map<String, Map<String, Integer>> COUNT_BY_FILE_MAP = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
-//        String path = "/Users/stone/IdeaProjects/yt/slt";
-        String path = "/Users/stone/code/yt/slt";
+        String path = "/Users/stone/IdeaProjects/yt/slt";
+//        String path = "/Users/stone/code/yt/slt";
         search(new File(path));
         printCountMap();
         printFileCountMap();
@@ -21,19 +21,19 @@ public class ReadProject {
     }
 
     private static void printCountMap() {
-        System.out.println("\n\n--> 数量总览");
+        System.out.println("\n\n--> count view:");
         System.out.println(JSON.toJSONString(COUNT_MAP));
     }
 
     private static void printFileCountMap() {
-        System.out.println("\n\n--> 文件数量总览");
+        System.out.println("\n\n--> count by file view:");
         System.out.println(JSON.toJSONString(COUNT_BY_FILE_MAP));
     }
 
     private static void printFileCount(Map<String, Integer> map) {
         List<Map.Entry<String, Integer>> entries = new ArrayList<>(map.entrySet());
         entries.sort((a, b) -> b.getValue() - a.getValue());
-        System.out.println("\n\n--> 数量排名");
+        System.out.println("\n\n--> count sort:");
         System.out.println(JSON.toJSONString(entries));
     }
 
