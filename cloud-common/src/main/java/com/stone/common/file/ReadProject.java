@@ -1,6 +1,7 @@
 package com.stone.common.file;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Maps;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -43,8 +44,13 @@ public class ReadProject {
                 increment.put(cnName, nowCount);
             }
         });
-        System.out.println("\n\n--> increment count view:");
-        System.out.println(JSON.toJSONString(increment));
+        System.out.println("\n\n--> nov increment count view:");
+        Map<String, Integer> result = Maps.newLinkedHashMapWithExpectedSize(increment.size());
+        increment.entrySet().stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue()
+                        .reversed())
+                .forEachOrdered(entry -> result.put(entry.getKey(), entry.getValue()));
+        System.out.println(JSON.toJSONString(result));
     }
 
     private static void printCountMap() {
