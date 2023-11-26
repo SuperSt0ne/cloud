@@ -29,7 +29,8 @@ public class ReadProject {
     }
 
     public static void main(String[] args) throws IOException {
-        search(new File(PATH_MAC));
+//        search(new File(PATH_MAC));
+        search(new File(PATH_MAC_MINI));
         printCountMap();
         printNovIncrement();
         printFileCountMap();
@@ -73,8 +74,8 @@ public class ReadProject {
     }
 
     private static void search(File file) throws IOException {
-        File[] fileArr = file.listFiles();
-        if (Objects.isNull(fileArr)) {
+        File[] fileArr;
+        if (!file.exists() || Objects.isNull(fileArr = file.listFiles())) {
             return;
         }
         for (File subFile : fileArr) {
