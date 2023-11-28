@@ -21,6 +21,8 @@ public class ReadProjectByUnicode {
 
     public static List<String> UNI_CONTENT_LIST = new ArrayList<>();
 
+    public static List<String> CUR_MONTH_DETAIL = new ArrayList<>();
+
     private static final String PREFIX_11 = "202311";
     private static final String PREFIX_10 = "202310";
     private static final String PREFIX_09 = "202309";
@@ -48,8 +50,13 @@ public class ReadProjectByUnicode {
         UNI_CONTENT_LIST = ReadProject.CONTENT_LIST;
 
         search(file);
+        printDetail();
         printUserCountMap();
         printMonthUserCountMap();
+    }
+
+    private static void printDetail() {
+        CUR_MONTH_DETAIL.forEach(System.out::println);
     }
 
     private static void printUserCountMap() {
@@ -139,6 +146,9 @@ public class ReadProjectByUnicode {
 //            UNI_CONTENT_LIST.remove(group);
 
             if (unicode.trim().startsWith("uniqueCode = \"" + PREFIX_11)) {
+                if (Objects.equals(developerName, "LANGE")) {
+                    CUR_MONTH_DETAIL.add(group);
+                }
                 statistic(developerName, "202311");
             }
             if (unicode.trim().startsWith("uniqueCode = \"" + PREFIX_10)) {
