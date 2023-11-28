@@ -15,7 +15,7 @@ public class ReadProjectByUnicode {
 
     private static final Map<String, String> USER_MAP = new HashMap<>();
 
-    private static final Map<String, Map<String, Integer>> MONTH_USER_COUNT_MAP = new HashMap<>();
+    private static final Map<String, Map<String, Integer>> MONTH_USER_COUNT_MAP = new LinkedHashMap<>();
 
     private static final Map<String, Integer> USER_COUNT_MAP = new HashMap<>();
 
@@ -37,6 +37,9 @@ public class ReadProjectByUnicode {
     private static final String PATH_MAC_MINI = "/Users/stone/code/yt/slt";
 
     static {
+        MONTH_USER_COUNT_MAP.put("202311", new HashMap<>());
+        MONTH_USER_COUNT_MAP.put("202310", new HashMap<>());
+        MONTH_USER_COUNT_MAP.put("202309", new HashMap<>());
         try {
             parseUser();
         } catch (IllegalAccessException e) {
@@ -70,7 +73,7 @@ public class ReadProjectByUnicode {
     }
 
     private static void printMonthUserCountMap() {
-        Map<String, Map<String, Integer>> result = new HashMap<>();
+        Map<String, Map<String, Integer>> result = new LinkedHashMap<>();
         MONTH_USER_COUNT_MAP.forEach((month, userCountMap) -> {
             Map<String, Integer> map = Maps.newLinkedHashMapWithExpectedSize(userCountMap.size());
             userCountMap.entrySet().stream()
