@@ -55,6 +55,7 @@ public class ReadProjectByUnicode {
         search(file);
         printDetail();
         printUserCountMap();
+        printNovIncrement();
         printMonthUserCountMap();
     }
 
@@ -68,8 +69,26 @@ public class ReadProjectByUnicode {
                 .sorted(Map.Entry.<String, Integer>comparingByValue()
                         .reversed())
                 .forEachOrdered(entry -> result.put(entry.getKey(), entry.getValue()));
+        System.out.println("\nuser_count_map view:");
         System.out.println(JSON.toJSONString(result));
-//        System.out.println(JSON.toJSONString(USER_COUNT_MAP));
+    }
+
+    private static void printNovIncrement() {
+        Map<String, Integer> increment = new HashMap<>(MonthCount.OCT_COUNT_MAP);
+        USER_COUNT_MAP.forEach((cnName, nowCount) -> {
+            if (increment.containsKey(cnName)) {
+                increment.computeIfPresent(cnName, (k, v) -> nowCount - v);
+            } else {
+                increment.put(cnName, nowCount);
+            }
+        });
+        System.out.println("\n202311_increment_count view:");
+        Map<String, Integer> result = Maps.newLinkedHashMapWithExpectedSize(increment.size());
+        increment.entrySet().stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue()
+                        .reversed())
+                .forEachOrdered(entry -> result.put(entry.getKey(), entry.getValue()));
+        System.out.println(JSON.toJSONString(result));
     }
 
     private static void printMonthUserCountMap() {
@@ -82,8 +101,8 @@ public class ReadProjectByUnicode {
                     .forEachOrdered(entry -> map.put(entry.getKey(), entry.getValue()));
             result.put(month, map);
         });
+        System.out.println("\nmonth_user_count_map view:");
         System.out.println(JSON.toJSONString(result));
-//        System.out.println(JSON.toJSONString(MONTH_USER_COUNT_MAP));
     }
 
     private static void search(File file) throws IOException {
@@ -125,7 +144,11 @@ public class ReadProjectByUnicode {
                 continue;
             }
 
-            String sbuContent = group.substring(group.indexOf("(") + 1, group.indexOf(")"));
+            if (!group.contains("developer")) {
+                continue;
+            }
+
+            String sbuContent = group.replace("(", "").replace(")", "");
             String[] split = sbuContent.split(",");
             String developerInfo = null, unicode = null, developerName;
             if (split.length < 3) {
@@ -139,11 +162,10 @@ public class ReadProjectByUnicode {
                     unicode = str;
                 }
             }
-            if (StringUtils.isBlank(developerInfo) || StringUtils.isBlank(unicode)) {
-                return;
-            }
-            if (StringUtils.isBlank(developerName = getDeveloperName(developerInfo))) {
-                return;
+            if (StringUtils.isBlank(developerInfo)
+                    || StringUtils.isBlank(unicode)
+                    || StringUtils.isBlank(developerName = getDeveloperName(developerInfo))) {
+                continue;
             }
 
 //            UNI_CONTENT_LIST.remove(group);
@@ -160,6 +182,7 @@ public class ReadProjectByUnicode {
             if (unicode.trim().startsWith("uniqueCode = \"" + PREFIX_09)) {
                 statistic(developerName, "202309");
             }
+
         }
     }
 
