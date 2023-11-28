@@ -20,6 +20,8 @@ public class ReadProject {
 
     private static final String PATH_MAC_MINI = "/Users/stone/code/yt/slt";
 
+    public static final List<String> CONTENT_LIST = new ArrayList<>();
+
     static {
         try {
             parseUser();
@@ -29,8 +31,8 @@ public class ReadProject {
     }
 
     public static void main(String[] args) throws IOException {
-//        search(new File(PATH_MAC));
-        search(new File(PATH_MAC_MINI));
+        search(new File(PATH_MAC));
+//        search(new File(PATH_MAC_MINI));
         printCountMap();
         printNovIncrement();
         printFileCountMap();
@@ -73,7 +75,7 @@ public class ReadProject {
         System.out.println(JSON.toJSONString(entries));
     }
 
-    private static void search(File file) throws IOException {
+    public static void search(File file) throws IOException {
         File[] fileArr;
         if (!file.exists() || Objects.isNull(fileArr = file.listFiles())) {
             return;
@@ -113,6 +115,9 @@ public class ReadProject {
                     }
                     s = s.replace(")", "");
                     String[] strArr = s.split("\\.");
+                    if (content.contains("LANGE")) {
+                        CONTENT_LIST.add(content);
+                    }
                     addCount(fileName, strArr[strArr.length - 1]);
                 }
             }

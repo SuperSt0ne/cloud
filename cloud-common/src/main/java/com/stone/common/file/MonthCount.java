@@ -2,6 +2,8 @@ package com.stone.common.file;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MonthCount {
 
@@ -42,5 +44,16 @@ public class MonthCount {
 
         SEP_COUNT_MAP.put(User.WUMING, 18);
         OCT_COUNT_MAP.put(User.WUMING, 21);
+    }
+
+    public static void main(String[] args) {
+        String str = "//    @BizStep(value = \"[应用配置项]限流规则改变\", developer = Developer.LANGE, uniqueCode = \"20231024171420_559697\")";
+        Pattern pattern = Pattern.compile("@(.*?)\\((.*)\\)");
+        Matcher matcher = pattern.matcher(str);
+        while (matcher.find()) {
+            String group = matcher.group();
+            System.out.println(group.substring(0, group.indexOf("(")));
+            System.out.println(group.substring(group.indexOf("(") + 1, group.indexOf(")")));
+        }
     }
 }
