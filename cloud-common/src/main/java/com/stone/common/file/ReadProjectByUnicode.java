@@ -172,7 +172,7 @@ public class ReadProjectByUnicode {
 
             if (unicode.trim().startsWith("uniqueCode = \"" + PREFIX_11)) {
                 if (Objects.equals(developerName, "LANGE")) {
-                    CUR_MONTH_DETAIL.add(group);
+                    CUR_MONTH_DETAIL.add(fileName + ": " + group);
                 }
                 statistic(developerName, "202311");
             }
