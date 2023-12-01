@@ -23,6 +23,7 @@ public class ReadProjectByUnicode {
 
     public static List<String> CUR_MONTH_DETAIL = new ArrayList<>();
 
+    private static final String PREFIX_12 = "202312";
     private static final String PREFIX_11 = "202311";
     private static final String PREFIX_10 = "202310";
     private static final String PREFIX_09 = "202309";
@@ -37,6 +38,7 @@ public class ReadProjectByUnicode {
     private static final String PATH_MAC_MINI = "/Users/stone/code/yt/slt";
 
     static {
+        MONTH_USER_COUNT_MAP.put("202312", new HashMap<>());
         MONTH_USER_COUNT_MAP.put("202311", new HashMap<>());
         MONTH_USER_COUNT_MAP.put("202310", new HashMap<>());
         MONTH_USER_COUNT_MAP.put("202309", new HashMap<>());
@@ -55,7 +57,7 @@ public class ReadProjectByUnicode {
         search(file);
         printDetail();
         printUserCountMap();
-        printNovIncrement();
+        printLatestIncrement();
         printMonthUserCountMap();
     }
 
@@ -73,7 +75,7 @@ public class ReadProjectByUnicode {
         System.out.println(JSON.toJSONString(result));
     }
 
-    private static void printNovIncrement() {
+    private static void printLatestIncrement() {
         Map<String, Integer> increment = new HashMap<>(MonthCount.OCT_COUNT_MAP);
         USER_COUNT_MAP.forEach((cnName, nowCount) -> {
             if (increment.containsKey(cnName)) {
@@ -82,7 +84,7 @@ public class ReadProjectByUnicode {
                 increment.put(cnName, nowCount);
             }
         });
-        System.out.println("\n202311_increment_count view:");
+        System.out.println("\nincrement_count view:");
         Map<String, Integer> result = Maps.newLinkedHashMapWithExpectedSize(increment.size());
         increment.entrySet().stream()
                 .sorted(Map.Entry.<String, Integer>comparingByValue()
@@ -170,10 +172,13 @@ public class ReadProjectByUnicode {
 
 //            UNI_CONTENT_LIST.remove(group);
 
-            if (unicode.trim().startsWith("uniqueCode = \"" + PREFIX_11)) {
+            if (unicode.trim().startsWith("uniqueCode = \"" + PREFIX_12)) {
                 if (Objects.equals(developerName, "LANGE")) {
                     CUR_MONTH_DETAIL.add(fileName + ": " + group);
                 }
+                statistic(developerName, "202312");
+            }
+            if (unicode.trim().startsWith("uniqueCode = \"" + PREFIX_11)) {
                 statistic(developerName, "202311");
             }
             if (unicode.trim().startsWith("uniqueCode = \"" + PREFIX_10)) {
