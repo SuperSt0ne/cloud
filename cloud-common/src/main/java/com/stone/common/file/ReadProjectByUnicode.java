@@ -76,7 +76,7 @@ public class ReadProjectByUnicode {
     }
 
     private static void printLatestIncrement() {
-        Map<String, Integer> increment = new HashMap<>(MonthCount.OCT_COUNT_MAP);
+        Map<String, Integer> increment = new HashMap<>(MonthCount.NOV_COUNT_MAP);
         USER_COUNT_MAP.forEach((cnName, nowCount) -> {
             if (increment.containsKey(cnName)) {
                 increment.computeIfPresent(cnName, (k, v) -> nowCount - v);
