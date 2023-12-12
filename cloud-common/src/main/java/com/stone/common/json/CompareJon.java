@@ -10,8 +10,8 @@ public class CompareJon {
     public static final List<String> NOT_SUPPORT_COMPARE_KEY = Arrays.asList("skuList", "deliveryMap");
 
     public static void main(String[] args) {
-        Map<String, String> curPath2BottomContentMap = new HashMap<>();
-        Map<String, String> sourcePath2BottomContentMap = new HashMap<>();
+        Map<String, String> curPath2BottomContentMap = new LinkedHashMap<>();
+        Map<String, String> sourcePath2BottomContentMap = new LinkedHashMap<>();
 
         JSONObject aObj = JSON.parseObject(a);
         JSONObject bObj = JSON.parseObject(b);
@@ -25,6 +25,9 @@ public class CompareJon {
         removeDiff(aObj, "root", difference);
         removeDiff(bObj, "root", difference);
 
+        System.out.println(JSON.toJSONString(aObj));
+        System.out.println(JSON.toJSONString(bObj));
+
         System.out.println("--");
     }
 
@@ -36,7 +39,10 @@ public class CompareJon {
             String curPath = path + "." + entry.getKey();
             if (value instanceof JSONObject) {
                 JSONObject val = (JSONObject) value;
-                removeDiff(val, entry.getKey(), difference);
+                removeDiff(val, curPath, difference);
+                if (val.size() == 0) {
+                    iterator.remove();
+                }
                 continue;
             }
             if (difference.containsKey(curPath)) {
@@ -47,7 +53,7 @@ public class CompareJon {
     }
 
     private static Map<String, String> difference(Map<String, String> mp1, Map<String, String> mp2) {
-        Map<String, String> difference = new HashMap<>();
+        Map<String, String> difference = new LinkedHashMap<>();
         mp1.forEach((k, v) -> {
             String content = mp2.remove(k);
             if (!Objects.equals(v, content)) {
@@ -93,12 +99,7 @@ public class CompareJon {
             "        \"prop_46412378\":\"杰夫·金尼\",\n" +
             "        \"quantity\":122,\n" +
             "        \"outer_id\":\"dsh2133\",\n" +
-            "        \"area\":{\n" +
-            "            \"province\":{\n" +
-            "                \"label\":\"山东省\",\n" +
-            "                \"value\":\"37\"\n" +
-            "            },\n" +
-            "        },\n" +
+            "        \"area\":{},\n" +
             "        \"location\":{\n" +
             "            \"prov\":\"山东省\",\n" +
             "            \"city\":\"济南市\"\n" +
